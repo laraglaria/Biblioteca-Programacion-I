@@ -26,7 +26,29 @@ namespace AccesoDatos.Repositories
         {
             return _context.Libros
                 .Include(l => l.Autor)
+                .Where(l => l.Activo)
                 .ToList();
+        }
+
+        public Libro? ObtenerPorId(int id)
+        {
+            return _context.Libros
+                .Include(l => l.Autor)
+                .Include(l => l.Categoria)
+                .FirstOrDefault(l => l.Id == id);
+        }
+
+        public void Modificar(Libro libro)
+        {
+            _context.Libros.Update(libro);
+            _context.SaveChanges();
+        }
+
+        public void EliminarLogicamente(Libro libro)
+        {
+            libro.Activo = false;
+            _context.Libros.Update(libro);
+            _context.SaveChanges();
         }
     }
 }

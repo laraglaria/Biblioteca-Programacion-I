@@ -15,6 +15,7 @@ namespace AccesoDatos.Data
             string rutaBaseDatos = Path.Combine(
                 Directory.GetCurrentDirectory(),
                 "..",
+                "AppConsola",
                 "biblioteca.db"
             );
 
